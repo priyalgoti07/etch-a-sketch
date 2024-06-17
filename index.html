@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch a Sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <h1 style="color: yellow;">Etch a Sketch</h1>
+        <button class="btn" onclick="myCount()">Enter Grid <br>Size</button>
+        <div id="square"></div>
+    </div>
+</body>
+<script>
+    const myCount = () => {
+        console.log("I am count");
+        let value = prompt("Please Enter Number");
+        let numSquares = parseInt(value);
+        console.log("value", value);
+
+        var container = document.getElementById('square');
+        // Clear any existing squares
+        container.innerHTML = '';
+
+        // Calculate the size of each square
+        let squareSize = container.clientWidth / numSquares;
+        console.log("squareSize", squareSize);
+        for (var i = 0; i < numSquares; i++) {
+            // Create a new div to act as a row
+            var rowDiv = document.createElement('div');
+            rowDiv.classList.add('row');
+
+            for (var j = 0; j < numSquares; j++) {
+                var squareDiv = document.createElement('div');
+                squareDiv.classList.add('innersquar');
+                squareDiv.style.width = squareSize + 'px';
+                squareDiv.style.height = squareSize + 'px';
+                rowDiv.appendChild(squareDiv);
+            }
+
+            // Append the row to the container
+            container.appendChild(rowDiv);
+        }
+    }
+
+    const colorback = () => {
+        console.log("i am Backgroundcolor",document.getElementsByClassName('innersquar') );
+
+        document.getElementsByClassName('innersquar').style.backgroundColor = "#325433"
+    }
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+body {
+    background: #78CCCB;
+}
+
+.main-container {
+    max-width: 750px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.btn {
+    background-color: #76B900;
+    padding: 7px 12px;
+    color: #fff;
+    font-size: 1rem;
+    width: 130px;
+    height: 50px;
+    font-family: 'Lobster', cursive;
+
+}
+
+.btn:hover {
+    box-shadow: 5px 5px 5px black;
+}
+
+#square {
+    width: 500px;
+    /* Set the size of the container */
+    height: 500px;
+    /* Set the size of the container */
+    display: flex;
+}
+
+.innersquar {
+    box-sizing: border-box;
+    border: 1px solid black; /* Optional: to visualize the squares */
+    /* flex: 1; */
+}   
