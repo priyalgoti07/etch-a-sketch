@@ -10,17 +10,38 @@
 
 <body>
     <div class="main-container">
-        <h1 style="color: yellow;">Etch a Sketch</h1>
-        <button class="btn" onclick="myCount()">Enter Grid <br>Size</button>
+        <h1>Etch a Sketch</h1>
+        <div class="main-btn">
+            <button class="btn" onclick="myCount()">Enter Grid <br>Size</button>
+            <button class="btn" onclick="clearGrid()">Clear Grid</button>
+            <button class="btn" onclick="rendomColor()">Random Color</button>
+            <button class="btn" onclick="blackShade()">Black Shade <br> +10%</button>
+            <button class="btn" onclick="defaultColor()">Default Color</button>
+            <button class="btn" onclick="eraseColor()">Eraser</button>
+
+        </div>
         <div id="square"></div>
     </div>
 </body>
+
 <script>
-    const myCount = () => {
-        console.log("I am count");
-        let value = prompt("Please Enter Number");
+
+    let squares = document.getElementsByClassName('innersquar');
+    console.log("squares", squares);
+    let value
+
+    const myCount = (no, item) => {
+        console.log("val------->", no, item);
+        if (no && item) {
+            value = no
+        }
+        else {
+            value = prompt("Please Enter Number of boxes per size. (Limit 100)");
+        }
+
         let numSquares = parseInt(value);
         console.log("value", value);
+
 
         var container = document.getElementById('square');
         // Clear any existing squares
@@ -38,7 +59,12 @@
                 var squareDiv = document.createElement('div');
                 squareDiv.classList.add('innersquar');
                 squareDiv.style.width = squareSize + 'px';
-                squareDiv.style.height = squareSize + 'px';
+                squareDiv.style.height = (squareSize / 2) + 'px';
+
+                squareDiv.addEventListener('mouseover', function () {
+                    this.style.backgroundColor = '#EF9C66'; // Change to desired color
+                });
+
                 rowDiv.appendChild(squareDiv);
             }
 
@@ -47,11 +73,63 @@
         }
     }
 
-    const colorback = () => {
-        console.log("i am Backgroundcolor",document.getElementsByClassName('innersquar') );
-
-        document.getElementsByClassName('innersquar').style.backgroundColor = "#325433"
+    const byDefaualtSqure = () => {
+        myCount(16, "byDefaualtSqure")
     }
+
+    const clearGrid = () => {
+        const removebox = document.getElementById('square')
+        removebox.innerHTML = ''; // Clear all squares
+        // removebox.remove();
+    }
+
+    const rendomColor = () => {
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].addEventListener('mouseover', function () {
+                this.style.backgroundColor = getRendomColor();
+            })
+        }
+    }
+
+    const blackShade = () => {
+        const darknessLevels = Array(squares.length).fill(0);
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].addEventListener('mouseover', function () {
+                darknessLevels[i] = Math.min(darknessLevels[i] + 0.1, 1); // Increase darkness by 10%, max 100%
+                const shade = Math.floor(darknessLevels[i] * 255); // Calculate the shade of gray
+                console.log("i am COLOR", `rgb(${255 - shade}, ${255 - shade}, ${255 - shade})`);
+                this.style.backgroundColor = `rgb(${255 - shade}, ${255 - shade}, ${255 - shade})`;
+            });
+        }
+    }
+    const getRendomColor = () => {
+        let letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    const eraseColor = () => {
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].addEventListener('mouseover', function () {
+                this.style.backgroundColor = ""; // Change to desired color
+            });
+        }
+    }
+
+    const defaultColor = () => {
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].addEventListener('mouseover', function () {
+                this.style.backgroundColor = "#EF9C66"; // Change to desired color
+            });
+        }
+    }
+    // myCount();
+
+
+    byDefaualtSqure();
 </script>
 
 </html>
